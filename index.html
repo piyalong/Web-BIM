@@ -1,0 +1,85 @@
+<html>
+<head>
+
+</head>
+<body>
+
+  <input type="range" min="1" max="100" value="1" class="slider" id="r">
+  <p>rotation: <span id="rotation"></span></p>
+  <input type="range" min="1" max="100" value="1" class="slider" id="s">
+  <p>scale: <span id="scale"></span></p>
+  <input type="range" min="1" max="100" value="1" class="slider" id="t">
+   <p>translate: <span id="translate"></span></p>
+  
+  <button id = 'clickMe' " >Send</button>
+
+
+
+
+
+  
+  
+  
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+
+var r=document.getElementById("r");
+var s=document.getElementById("s");
+var t=document.getElementById("t");
+
+
+var rotation= document.getElementById("rotation");
+var scale= document.getElementById("scale");
+var translate= document.getElementById("translate");
+
+r.oninput = function(){rotation.innerHTML = this.value;}
+s.oninput = function(){scale.innerHTML = this.value;}
+t.oninput = function(){translate.innerHTML = this.value;}
+
+
+var socket = io("localhost:3000");
+
+
+
+
+document.getElementById("clickMe").onclick = function () { 
+socket.emit('rotation',r.value)
+socket.emit('scale',s.value)
+socket.emit('translate',t.value)
+ };
+
+
+
+
+
+
+
+
+
+
+	socket.on('rotation',function(data){
+		rotation.innerHTML = data
+		
+		});
+		
+		socket.on('scale',function(data){
+		scale.innerHTML = data
+		
+		});
+		
+		socket.on('translate',function(data){
+		translate.innerHTML = data
+		
+		});
+		
+		
+
+  
+  
+  
+</script>
+
+</body>
+</html>
